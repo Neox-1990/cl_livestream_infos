@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualifikation</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="quali.css">
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script>
+    $(init);
+    function init(){
+      $.getJSON("../data/quali.json",function(data){
+        var pagenum = Math.ceil(data.length/10);
+        for(var i=1;i<=pagenum;i++){
+          $('#mainframe').append('<div class="page" id="page'+i+'"></div>');
+        }
+        data.forEach(writeDrivers);
+        $('#page2').toggle();
+        $('#page3').toggle();
+        setInterval(cyclePage, 15000);
+      });
+    }
+    function cyclePage(){
+      if($('#page1').css('display')=='block'){
+        $('#page1').fadeToggle(function(){$('#page2').fadeToggle();});
+      }else if($('#page2').css('display')=='block'){
+        $('#page2').fadeToggle(function(){$('#page3').fadeToggle();});
+      }else if($('#page3').css('display')=='block'){
+        $('#page3').fadeToggle(function(){$('#page1').fadeToggle();});
+      }
+    }
+    function writeDrivers(val, ind, ar){
+      $('#mainframe #page'+Math.ceil((ind+1)/10)+'').append('<div class="row"><div>'+(ind+1)+'</div><div>'+val.name+'</div><div>'+val.car+'</div><div>'+buildTime(val.time)+'</div><div>'+buildDelta(ar[0].time,val.time)+'</div><div class="clear"></div></div>');
+    }
+    function buildTime(time){
+      var min = Math.floor(time/60000);
+      var sek = ((time - min * 60000)/1000).toFixed(2);
+      if(sek<10) sek = '0'+sek;
+      return min+":"+sek;
+    }
+    function buildTime2(time){
+      var sek = (time/1000).toFixed(2);
+      return sek;
+    }
+    function buildDelta(ref, time){
+      var diff = time-ref;
+      return '+'+buildTime2(diff);
+    }
+  </script>
+  </head>
+  <body>
+  <div id="mainframe">
+    <h1>Qualifying Result</h1>
+  </div>
+  </body>
+</html>
