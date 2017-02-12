@@ -36,7 +36,7 @@
     }
     function writeDrivers(val, ind, ar){
       $('#mainframe #page'+Math.ceil((ind+1)/10)+'').append('<div class="row"><div>'+
-      (ind+1)+'</div><div>'+val.name+'</div><div>'+buildTeam(val.lfsname)+
+      (ind+1)+'</div><div>'+val.name+'</div><div class="teamtag">'+buildTeam(val.lfsname)+
       '</div><div>'+val.car+'</div><div>'+buildTime(val.time)+'</div><div>'+
       (ar[0].laps==val.laps?buildDelta(ar[0].time,val.time):'-'+1+'lap')+
       '</div><div class="clear"></div></div>');
@@ -57,7 +57,20 @@
     }
     function buildTeam(lfsname){
       if(teams.hasOwnProperty(lfsname)){
-        return teams[lfsname];
+        var teamname = teams[lfsname];
+        var safetycount = 0;
+        while(/\^\d/.test(teamname) && safetycount < 10){
+          teamname = teamname.replace(/\^0(.*)((\^\d)|.*$)/,'<span class="c0">$1</span>$2');
+          teamname = teamname.replace(/\^1(.*)((\^\d)|.*$)/,'<span class="c1">$1</span>$2');
+          teamname = teamname.replace(/\^2(.*)((\^\d)|.*$)/,'<span class="c2">$1</span>$2');
+          teamname = teamname.replace(/\^3(.*)((\^\d)|.*$)/,'<span class="c3">$1</span>$2');
+          teamname = teamname.replace(/\^4(.*)((\^\d)|.*$)/,'<span class="c4">$1</span>$2');
+          teamname = teamname.replace(/\^5(.*)((\^\d)|.*$)/,'<span class="c5">$1</span>$2');
+          teamname = teamname.replace(/\^6(.*)((\^\d)|.*$)/,'<span class="c6">$1</span>$2');
+          teamname = teamname.replace(/\^7(.*)((\^\d)|.*$)/,'<span class="c7">$1</span>$2');
+          safetycount++;
+        }
+        return teamname;
       } else return '&nbsp;';
     }
   </script>

@@ -60,3 +60,30 @@ h1{
   float:none !important;
   clear:both;
 }
+.teamtag{
+  font-weight: bolder;
+}
+.c0{
+  color:#EEE;
+}
+.c1{
+  color:#E00;
+}
+.c2{
+  color:#0E0;
+}
+.c3{
+  color:#00E;
+}
+.c4{
+  color:#EE0;
+}
+.c5{
+  color:#0EE;
+}
+.c6{
+  color:#E0E;
+}
+.c7{
+  color:#111;
+}
