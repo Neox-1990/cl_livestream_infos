@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qualifikation</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="quali.css">
+    <link rel="stylesheet" href="pages.css">
     <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
+  <script src="../data/teams.json"></script>
   <script>
     $(init);
     function init(){
@@ -34,7 +35,10 @@
       }
     }
     function writeDrivers(val, ind, ar){
-      $('#mainframe #page'+Math.ceil((ind+1)/10)+'').append('<div class="row"><div>'+(ind+1)+'</div><div>'+val.name+'</div><div>'+val.car+'</div><div>'+buildTime(val.time)+'</div><div>'+buildDelta(ar[0].time,val.time)+'</div><div class="clear"></div></div>');
+      $('#mainframe #page'+Math.ceil((ind+1)/10)+'').append('<div class="row"><div>'+
+      (ind+1)+'</div><div>'+val.name+'</div><div>'+buildTeam(val.lfsname)+
+      '</div><div>'+val.car+'</div><div>'+buildTime(val.time)+'</div><div>'+
+      buildDelta(ar[0].time,val.time)+'</div><div class="clear"></div></div>');
     }
     function buildTime(time){
       var min = Math.floor(time/60000);
@@ -49,6 +53,11 @@
     function buildDelta(ref, time){
       var diff = time-ref;
       return '+'+buildTime2(diff);
+    }
+    function buildTeam(lfsname){
+      if(teams.hasOwnProperty(lfsname)){
+        return teams[lfsname];
+      } else return '&nbsp;';
     }
   </script>
   </head>

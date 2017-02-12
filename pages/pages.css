@@ -50,7 +50,11 @@ h1{
 }
 #mainframe .page .row>div:nth-child(2){
   text-align: left;
-  width:60%;
+  width:40%;
+}
+#mainframe .page .row>div:nth-child(3){
+  text-align: center;
+  width:20%;
 }
 .clear{
   float:none !important;

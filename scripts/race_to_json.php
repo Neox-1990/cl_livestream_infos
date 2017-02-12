@@ -7,7 +7,7 @@
   foreach ($drivers as $driver) {
     $driverelement = array(
       'name' => utf8_encode($driver->pname),
-      'lfsname' => utf8_encode($driver->lfsuname),
+      'lfsname' => utf8_encode(strtolower($driver->lfsuname)),
       'time' => $driver->racetime,
       'car'  => $driver->scarname,
       'laps' => $driver->laps
@@ -16,4 +16,5 @@
   }
 
   file_put_contents('../data/race.json', json_encode($tidyArray));
+  echo json_last_error_msg();
  ?>
