@@ -14,6 +14,7 @@
   <script>
     $(init);
     function init(){
+	  $.ajaxSetup({ cache: false });
       $.getJSON("../data/race.json",function(data){
         var pagenum = Math.ceil(data.length/10);
         for(var i=1;i<=pagenum;i++){
