@@ -39,7 +39,7 @@
       $('#mainframe #page'+Math.ceil((ind+1)/10)+'').append('<div class="row"><div>'+
       (ind+1)+'</div><div>'+val.name+'</div><div class="teamtag">'+buildTeam(val.lfsname)+
       '</div><div>'+val.car+'</div><div>'+buildTime(val.time)+'</div><div>'+
-      (ar[0].laps==val.laps?buildDelta(ar[0].time,val.time):'-'+1+'lap')+
+      (ar[0].laps==val.laps?buildDelta(ar[0].time,val.time):'-'+(val.laps - ar[0].laps)+'lap')+
       '</div><div class="clear"></div></div>');
     }
     function buildTime(time){
