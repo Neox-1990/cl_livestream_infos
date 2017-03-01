@@ -21,18 +21,20 @@
           $('#mainframe').append('<div class="page" id="page'+i+'"></div>');
         }
         data.forEach(writeDrivers);
-        $('#page2').toggle();
-        $('#page3').toggle();
+        for(var i=2;i<=pagenum;i++){
+          $('#page'+i).toggle();
+        }
         setInterval(cyclePage, 15000);
       });
     }
     function cyclePage(){
-      if($('#page1').css('display')=='block'){
-        $('#page1').fadeToggle(function(){$('#page2').fadeToggle();});
-      }else if($('#page2').css('display')=='block'){
-        $('#page2').fadeToggle(function(){$('#page3').fadeToggle();});
-      }else if($('#page3').css('display')=='block'){
-        $('#page3').fadeToggle(function(){$('#page1').fadeToggle();});
+      var num = $('.page').length;
+      console.log(num);
+      for(var i=1;i<=num; i++){
+        if($('#page'+i).css('display')=='block'){
+          $('#page'+i).fadeToggle(function(){$('#page'+((i%num)+1)).fadeToggle();});
+          break;
+        }
       }
     }
     function writeDrivers(val, ind, ar){
