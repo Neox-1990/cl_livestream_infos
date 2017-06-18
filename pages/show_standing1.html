@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standing</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="pages.css">
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script src="../data/teams.json"></script>
+  <script>
+    $(init);
+    function init(){
+	  $.ajaxSetup({ cache: false });
+      $.getJSON("../data/standing1.json",function(data){
+        var pagenum = Math.ceil(data.length/10);
+        for(var i=1;i<=pagenum;i++){
+          $('#mainframe').append('<div class="page" id="page'+i+'"></div>');
+        }
+        data.forEach(writeDrivers);
+        for(var i=2;i<=pagenum;i++){
+          $('#page'+i).toggle();
+        }
+        setInterval(cyclePage, 15000);
+      });
+    }
+    function cyclePage(){
+      var num = $('.page').length;
+      console.log(num);
+      for(var i=1;i<=num; i++){
+        if($('#page'+i).css('display')=='block'){
+          $('#page'+i).fadeToggle(function(){$('#page'+((i%num)+1)).fadeToggle();});
+          break;
+        }
+      }
+    }
+    function writeDrivers(val, ind, ar){
+      $('#mainframe #page'+Math.ceil((ind+1)/10)+'').append('<div class="row"><div>'+
+      (ind+1)+'</div><div>'+val.name+'</div>'+
+      '<div>'+val.pts+' pts</div>'+
+      '<div>'+(val.first==0?'<span class="fin finish_0"></span>':'<span class="fin finish_1">'+val.first+'</span>')+'</div>'+
+      '<div>'+(val.second==0?'<span class="fin finish_0"></span>':'<span class="fin finish_2">'+val.second+'</span>')+'</div>'+
+      '<div>'+(val.third==0?'<span class="fin finish_0"></span>':'<span class="fin finish_3">'+val.third+'</span>')+'</div>'+
+      '<div class="clear"></div></div>');
+    }
+  </script>
+  </head>
+  <body>
+  <div id="mainframe">
+    <h1>Driverstanding Grid 1</h1>
+  </div>
+  </body>
+</html>

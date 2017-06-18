@@ -87,3 +87,24 @@ h1{
 .c7{
   color:#111;
 }
+.fin{
+  display:inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 50%;
+  font-size: 0.8em;
+  border: 1px solid white;
+  box-sizing: border-box;
+  color: black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.finish_1{
+  background: gold;
+}
+.finish_2{
+  background: silver;
+}
+.finish_3{
+  background: #bd3900;
+  color: white;
+}
